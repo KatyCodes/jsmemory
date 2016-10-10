@@ -1,3 +1,9 @@
 .display {
-  display: hidden
+  display: none;
+}
+
+div.card {
+  height: 200px;
+  background-color: papayawhip;
+  border: 1px solid tomato;
 }

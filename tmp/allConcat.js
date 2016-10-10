@@ -6,7 +6,6 @@ $(document).ready(function(){
   var cardCount=0;
   var memory = new Memory("steve");
   $('.card').click(function(){
-    $(".message").text("");
     $(this).children().show();
     cardCount++;
     if(cardCount > 1){

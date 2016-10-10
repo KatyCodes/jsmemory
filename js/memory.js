@@ -5,7 +5,7 @@ function Memory(username){
 
 Memory.prototype.checkMatch = function (card1, card2) {
   if (card1 === card2){
-    matches++;
+    this.matches++;
     return true;
   } else {
     return false;
@@ -13,7 +13,7 @@ Memory.prototype.checkMatch = function (card1, card2) {
 };
 
 Memory.prototype.hasWon = function () {
-  return matches === 5;
+  return this.matches === 5;
 };
 
 exports.memoryModule = Memory;
