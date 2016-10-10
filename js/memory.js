@@ -16,4 +16,8 @@ Memory.prototype.hasWon = function () {
   return this.matches === 5;
 };
 
+Memory.prototype.reset = function() {
+  this.matches = 0;
+};
+
 exports.memoryModule = Memory;
