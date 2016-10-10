@@ -18,9 +18,9 @@ $(document).ready(function(){
         cardCount=0;
         card2 = $(this).attr('id');
         if(memory.checkMatch(card1.slice(0, -1), card2.slice(0, -1))){
-          $(".message").text("It's a match! Yaaaaaaaaay");
+          $(".message").html("<h1>It's a match!</h1>");
           if(memory.hasWon()){
-            $(".message").html("<h1>You won! Yaaaaaaaaay</h1>");
+            $(".message").html("<h1>You won! Yaaaaaaaaay!</h1>");
             memory.reset();
             setTimeout(function(){
               createBoard();
