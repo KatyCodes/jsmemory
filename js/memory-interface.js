@@ -6,10 +6,11 @@ $(document).ready(function(){
   var card1;
   var card2;
   var cardCount=0;
-  $('#board').html(createBoard());
+  createBoard();
   var memory = new Memory("steve");
   $('.card').click(function(){
     if($(this).children("i").is(":hidden")){
+      console.log("inside the hidden check");
       $(".message").text("");
       $(this).children().show();
       cardCount++;
@@ -20,9 +21,11 @@ $(document).ready(function(){
           $(".message").text("It's a match! Yaaaaaaaaay");
           if(memory.hasWon()){
             $(".message").html("<h1>You won! Yaaaaaaaaay</h1>");
-            $(".display").delay(3000).hide(0);
             memory.reset();
-            $('#board').html(createBoard());
+            setTimeout(function(){
+              createBoard();
+              $(".message").text("");
+            }, 3000);
           }
         }
         else{
@@ -30,8 +33,11 @@ $(document).ready(function(){
           $("#" + card2).children().delay(500).hide(0);
         }
       } else {
+        console.log("click 1");
         card1 = $(this).attr('id');
       }
+    } else {
+      console.log("here is the else for the hidden check");
     }
   });
 });
@@ -39,17 +45,16 @@ $(document).ready(function(){
 function createBoard(){
   var cardHash = [{name: "heart", icon:"fa-heart", used: 0}, {name: "star", icon:"fa-star", used: 0}, {name: "moon", icon:"fa-moon-o", used: 0}, {name: "shuttle", icon:"fa-space-shuttle", used: 0}, {name: "paw", icon:"fa-paw", used: 0}];
   var htmlString="";
-  for (var i = 0; i < 2; i++) {
-    htmlString += "<div class='row'>";
-    for (var j = 0; j < 5; j++) {
+  $('#board').children(".row").each(function(i){
+    $(this).children(".card").each(function(j){
       var random=0;
-      do{
-        random = Math.floor(Math.random()*5);
-      }while(cardHash[random].used > 1);
-      htmlString += "<div class='col-md-2 card' id='" + cardHash[random].name + cardHash[random].used + "'> <i class='display fa " + cardHash[random].icon + "' aria-hidden='true'></i></div>";
-      cardHash[random].used++;
-    }
-    htmlString += "</div>";
-  }
-  return htmlString;
+       do{
+         random = Math.floor(Math.random()*5);
+       }while(cardHash[random].used > 1);
+       htmlString = "<i class='display fa " + cardHash[random].icon + "' aria-hidden='true'></i>";
+       $(this).html(htmlString);
+       $(this).attr("id", cardHash[random].name + cardHash[random].used);
+       cardHash[random].used++;
+    });
+  });
 }
